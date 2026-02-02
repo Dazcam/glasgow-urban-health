@@ -43,12 +43,18 @@ st.sidebar.metric("Avg Health Rank", f"{int(avg_health)}")
 st.sidebar.metric("Total Parks in View", f"{int(total_parks)}")
 st.sidebar.metric("Zones Selected", f"{zone_count}")
 
+map_theme = st.sidebar.selectbox(
+    "Select Map Layer",
+    options=["SIMD2020_Health_Domain_Rank", "park_count", "park_density"],
+    format_func=lambda x: x.replace("_", " ").title() # Makes names look pretty
+)
+
 
 # 4. Visualization Layout
 col1, col2 = st.columns([3, 1])
 
 with col1:
-    st.subheader("Spatial Distribution of Health vs. Greenery")
+    st.subheader(f"Mapping: {map_theme.replace('_', ' ').title()}")
     
     # Create the map center at Glasgow coordinates
     m = folium.Map(location=[55.8642, -4.2518], zoom_start=12, tiles="CartoDB positron")
@@ -56,14 +62,15 @@ with col1:
     # Add the choropleth layer
     folium.Choropleth(
         geo_data=filtered_gdf,
-        name="Health Deprivation",
+        name="Urban Data Overlay",
         data=filtered_gdf,
-        columns=["DataZone", "SIMD2020_Health_Domain_Rank"],
+        columns=["DataZone", map_theme],  # <--- Changed from hardcoded string
         key_on="feature.properties.DataZone",
-        fill_color="RdYlGn", # Red-Yellow-Green (Standard health scale)
+        # Logic to change colors: Green-Blue for parks, Red-Green for health
+        fill_color="YlGn" if "park" in map_theme else "RdYlGn", 
         fill_opacity=0.7,
         line_opacity=0.2,
-        legend_name="Health Rank"
+        legend_name=map_theme.replace("_", " ").title()
     ).add_to(m)
 
     st_folium(m, width=900, height=600)
