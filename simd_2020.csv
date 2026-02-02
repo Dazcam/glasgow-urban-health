@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>404 - Not Found</title>
+  <link rel="stylesheet" href="/webfiles/latest/assets/css/main.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900,400italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div class="ds_page">
+
+  <div class="ds_page__top">
+    <header class="ds_site-header" role="banner">
+        <div class="ds_wrapper">
+            <div class="ds_site-header__content">
+                <div class="ds_site-branding">
+                    <a class="ds_site-branding__logo  ds_site-branding__link" href="/">
+                        <div class="ds_site-branding__logo-image">
+                            <img class="ds_site-branding__logo-image" src="/assets/images/logos/scotgovlogo.svg" alt="Scottish Government">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<div class="ds_page__middle">
+    <div class="ds_wrapper">
+      <main id="main-content" class="ds_layout  ds_layout--article">
+        <div class="ds_layout__header">
+          <header class="ds_page-header">
+            <h1 class="ds_page-header__title">Not Found (404)</h1>
+          </header>
+        </div>
+
+        <div class="ds_layout__content">
+          <p>
+            Sorry, but the page you were trying to view does not exist. This could be the result of either:
+          </p>
+          <ul>
+            <li>a mistyped address</li>
+            <li>an out of date link</li>
+          </ul>        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="ds_page__bottom">
+    <footer class="ds_site-footer">
+        <div class="ds_wrapper">
+            <div class="ds_site-footer__content">
+
+                <div class="ds_site-footer__copyright">
+                    <span data-footer="footer-copyright" class="ds_site-footer__copyright-logo">
+                        <img src="/assets/images/logos/ogl.svg" alt="Open Government License" width="41" height="17"/>
+                    </span>
+                    <p>All content is available under the <a data-footer="copyright" href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>, except for graphic assets and where otherwise stated</p>
+                    <p>&copy; Crown Copyright</p>
+                </div>
+
+                <div class="ds_site-footer__org">
+                    <a data-footer="footer-logo" class="ds_site-footer__org-link" title="The Scottish Government" href="http://www.gov.scot/">
+                        <img class="ds_site-footer__org-logo" src="/assets/images/logos/scottish-government--min.svg" alt="gov.scot" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+</body>
+
+</html>
