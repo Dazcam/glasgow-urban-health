@@ -23,12 +23,26 @@ gdf = get_data()
 st.sidebar.header("Filter Analytics")
 # 'Health_domain_rank' is a common column name in SIMD
 health_metric = st.sidebar.slider("Select Health Rank (Lower = More Deprived)", 
-                                  int(gdf.Health_domain_rank.min()), 
-                                  int(gdf.Health_domain_rank.max()), 
+                                  int(gdf.SIMD2020_Health_Domain_Rank.min()), 
+                                  int(gdf.SIMD2020_Health_Domain_Rank.max()), 
                                   (1, 1000))
 
-filtered_gdf = gdf[(gdf.Health_domain_rank >= health_metric[0]) & 
-                    (gdf.Health_domain_rank <= health_metric[1])]
+filtered_gdf = gdf[(gdf.SIMD2020_Health_Domain_Rank >= health_metric[0]) & 
+                    (gdf.SIMD2020_Health_Domain_Rank <= health_metric[1])]
+
+st.sidebar.markdown("---") # Visual separator
+st.sidebar.subheader("Live Stats")
+
+# Calculate metrics based on the filtered data
+avg_health = filtered_gdf['SIMD2020_Health_Domain_Rank'].mean()
+total_parks = filtered_gdf['park_count'].sum()
+zone_count = len(filtered_gdf)
+
+# Display as cards
+st.sidebar.metric("Avg Health Rank", f"{int(avg_health)}")
+st.sidebar.metric("Total Parks in View", f"{int(total_parks)}")
+st.sidebar.metric("Zones Selected", f"{zone_count}")
+
 
 # 4. Visualization Layout
 col1, col2 = st.columns([3, 1])
@@ -44,7 +58,7 @@ with col1:
         geo_data=filtered_gdf,
         name="Health Deprivation",
         data=filtered_gdf,
-        columns=["DataZone", "Health_domain_rank"],
+        columns=["DataZone", "SIMD2020_Health_Domain_Rank"],
         key_on="feature.properties.DataZone",
         fill_color="RdYlGn", # Red-Yellow-Green (Standard health scale)
         fill_opacity=0.7,
@@ -60,4 +74,4 @@ with col2:
     st.metric("Avg Parks per Zone", round(filtered_gdf['park_count'].mean(), 2))
     
     # Show a raw data preview to prove engineering transparency
-    st.write("Raw Attributes", filtered_gdf[['DataZone', 'Health_domain_rank', 'park_count']].head())
+    st.write("Raw Attributes", filtered_gdf[['DataZone', 'SIMD2020_Health_Domain_Rank', 'park_count']].head())
